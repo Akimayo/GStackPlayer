@@ -63,7 +63,6 @@ namespace GStackPlayer.Models
         {
             // TODO: Save current app state to file
             
-            throw new NotImplementedException();
         }
     }
 }

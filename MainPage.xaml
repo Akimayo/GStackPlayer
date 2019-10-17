@@ -6,9 +6,27 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" x:Name="Page">
 
-    <Grid>
-
-    </Grid>
+    <SplitView IsPaneOpen="True" PaneClosing="CancelPaneClose" OpenPaneLength="{x:Bind PaneSquareFillSize, Mode=OneWay}" DisplayMode="CompactInline">
+        <SplitView.Pane>
+            <ListView Background="{x:Null}">
+                
+            </ListView>
+        </SplitView.Pane>
+        <SplitView.Content>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="{x:Bind FileExplorerHeight, Mode=OneWay}" />
+                    <RowDefinition Height="{x:Bind PlayerHeight, Mode=OneWay}" />
+                </Grid.RowDefinitions>
+                <Pivot Grid.Row="0"></Pivot>
+                <MediaPlayerElement AreTransportControlsEnabled="True" Grid.Row="1">
+                    <MediaPlayerElement.TransportControls>
+                        <MediaTransportControls IsPlaybackRateButtonVisible="False" IsFullWindowButtonVisible="False" />
+                    </MediaPlayerElement.TransportControls>
+                </MediaPlayerElement>
+            </Grid>
+        </SplitView.Content>
+    </SplitView>
 </Page>
