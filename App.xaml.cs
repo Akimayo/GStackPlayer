@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GStackPlayer.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -23,12 +24,18 @@ namespace GStackPlayer
     sealed partial class App : Application
     {
         /// <summary>
+        /// Storage Model for current app instance
+        /// </summary>
+        internal StorageModel Storage { get; }
+
+        /// <summary>
         /// Inicializuje objekt aplikace typu singleton. Jedná se o první řádek spuštěného vytvořeného kódu,
         /// který je proto logickým ekvivalentem metod main() nebo WinMain().
         /// </summary>
         public App()
         {
             this.InitializeComponent();
+            this.Storage = StorageModel.GetInstance();
             this.Suspending += OnSuspending;
         }
 
@@ -94,6 +101,7 @@ namespace GStackPlayer
         {
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Uložit stav aplikace a zastavit jakoukoliv aktivitu na pozadí
+            this.Storage.SaveCurrentState();
             deferral.Complete();
         }
     }
